@@ -27,7 +27,7 @@ For this portfolio specifically, ADRs are also a deliberate interview artifact. 
 | 0004 *(forthcoming)* | IaC tooling: Bicep + Azure Verified Modules | Proposed | 2026-05 |
 | 0005 *(forthcoming)* | Resource naming convention | Proposed | 2026-05 |
 | 0006 *(forthcoming)* | Identity model: managed identities + OIDC federation | Proposed | 2026-05 |
-| 0007 *(forthcoming)* | Subscription topology: platform vs. workload split | Proposed | 2026-05 |
+| [0007](./0007-single-subscription-topology.md) | Single-subscription topology with management-group separation | Accepted | 2026-05-06 |
 
 ## Statuses used
 
