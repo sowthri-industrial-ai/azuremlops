@@ -1,0 +1,170 @@
+# =====================================================================
+# Secrets — NEVER commit these
+# =====================================================================
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+.env
+.env.*
+!.env.example
+secrets.yaml
+secrets.json
+*.secrets.*
+azureauth.json
+azureProfile.json
+
+# =====================================================================
+# Python
+# =====================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Type checkers
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# =====================================================================
+# Bicep & ARM
+# =====================================================================
+*.bicepparam.json   # Generated from .bicepparam — ephemeral
+main.json           # Output from `az bicep build`
+*.json.compiled
+
+# =====================================================================
+# Terraform (defensive — even though we use Bicep, in case it ever appears)
+# =====================================================================
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfvars
+!*.tfvars.example
+
+# =====================================================================
+# Node / npm (for portfolio-site phase)
+# =====================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp.*
+.yarn/install-state.gz
+
+# =====================================================================
+# IDE & editor
+# =====================================================================
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json.example
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+.history/
+
+# =====================================================================
+# OS noise
+# =====================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# =====================================================================
+# Logs & temp
+# =====================================================================
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+
+# =====================================================================
+# Local-only data
+# =====================================================================
+data/raw/
+data/interim/
+data/processed/
+data/external/
+!data/.gitkeep
+*.parquet
+*.csv
+*.xlsx
+*.h5
+!**/test/fixtures/*
+
+# =====================================================================
+# ML artifacts
+# =====================================================================
+mlruns/
+mlartifacts/
+*.pkl
+*.joblib
+*.onnx
+*.pt
+*.pth
+*.h5
+*.ckpt
+checkpoints/
+
+# =====================================================================
+# Build & package outputs
+# =====================================================================
+*.zip
+*.tar.gz
+*.tgz
+*.dmg
+*.pkg
