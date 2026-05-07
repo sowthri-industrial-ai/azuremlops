@@ -1,0 +1,52 @@
+# CODEOWNERS — folder-scoped review responsibility
+#
+# Every PR touching a path below requires approval from the listed owner(s).
+# When the platform team grows, add the team handle (e.g. @sowthri-industrial-ai/platform-team)
+# rather than individual users — that way membership is managed in one place.
+#
+# Order matters: later patterns override earlier ones.
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-security/customizing-your-repository/about-code-owners
+
+# ---------- default owner for everything ----------
+*                                    @sowthri-industrial-ai
+
+# ---------- root-level strategic documents ----------
+/README.md                           @sowthri-industrial-ai
+/ROADMAP.md                          @sowthri-industrial-ai
+/NON-NEGOTIABLES.md                  @sowthri-industrial-ai
+/AI-300-COVERAGE.md                  @sowthri-industrial-ai
+/SECURITY.md                         @sowthri-industrial-ai
+/CONTRIBUTING.md                     @sowthri-industrial-ai
+
+# ---------- architecture & decisions ----------
+/docs/                               @sowthri-industrial-ai
+/docs/adr/                           @sowthri-industrial-ai
+
+# ---------- platform (consumed by all workloads) ----------
+/platform/                           @sowthri-industrial-ai
+/platform/infra/                     @sowthri-industrial-ai
+/platform/workflows/                 @sowthri-industrial-ai
+/platform/observability/             @sowthri-industrial-ai
+/platform/policy/                    @sowthri-industrial-ai
+
+# ---------- workload projects ----------
+/projects/                           @sowthri-industrial-ai
+/projects/01-predictive-maintenance/ @sowthri-industrial-ai
+/projects/02-genaiops-hse-rag/       @sowthri-industrial-ai
+/projects/03-operator-copilot/       @sowthri-industrial-ai
+
+# ---------- architect deliverables ----------
+/architecture/                       @sowthri-industrial-ai
+
+# ---------- portfolio site ----------
+/portfolio-site/                     @sowthri-industrial-ai
+
+# ---------- certification preparation ----------
+/cert-prep/                          @sowthri-industrial-ai
+
+# ---------- repo automation & security ----------
+/.github/                            @sowthri-industrial-ai
+/.github/workflows/                  @sowthri-industrial-ai
+/.github/CODEOWNERS                  @sowthri-industrial-ai
+/.gitignore                          @sowthri-industrial-ai
+/.pre-commit-config.yaml             @sowthri-industrial-ai

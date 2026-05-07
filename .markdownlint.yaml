@@ -1,0 +1,44 @@
+# Markdownlint configuration
+# Reference: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+# Default state — most rules enabled
+default: true
+
+# Line length — disabled. Architectural docs and ADRs benefit from longer
+# prose lines; we don't enforce a column limit.
+MD013: false
+
+# Inline HTML — allowed. Used for collapsible details, badges, and
+# pull-request templates.
+MD033: false
+
+# First line in file H1 — disabled because YAML front-matter exists in
+# issue templates.
+MD041: false
+
+# Multiple top-level headings — allowed in long architecture documents
+MD025: false
+
+# Heading style — atx (`#` prefix) only, never setext
+MD003:
+  style: atx
+
+# Unordered list style — hyphens
+MD004:
+  style: dash
+
+# List indentation — 2 spaces
+MD007:
+  indent: 2
+
+# No trailing punctuation in headings — keep ":" allowed for "Reference:" etc.
+MD026:
+  punctuation: ".,;!?"
+
+# Code-block style — fenced
+MD046:
+  style: fenced
+
+# Link reference style — collapsed
+MD054:
+  collapsed: true

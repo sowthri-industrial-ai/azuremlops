@@ -1,0 +1,119 @@
+version: 2
+updates:
+  # ---------- GitHub Actions ----------
+  # Update workflow action versions weekly; security updates immediately.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "Asia/Riyadh"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      actions-minor:
+        update-types:
+          - "minor"
+          - "patch"
+    reviewers:
+      - "sowthri-industrial-ai"
+
+  # ---------- Python dependencies (workload projects) ----------
+  - package-ecosystem: "pip"
+    directory: "/projects/01-predictive-maintenance"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "Asia/Riyadh"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+      - "project-01"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      python-minor:
+        update-types:
+          - "minor"
+          - "patch"
+    reviewers:
+      - "sowthri-industrial-ai"
+
+  - package-ecosystem: "pip"
+    directory: "/projects/02-genaiops-hse-rag"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "Asia/Riyadh"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+      - "project-02"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      python-minor:
+        update-types:
+          - "minor"
+          - "patch"
+    reviewers:
+      - "sowthri-industrial-ai"
+
+  - package-ecosystem: "pip"
+    directory: "/projects/03-operator-copilot"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "Asia/Riyadh"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+      - "project-03"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      python-minor:
+        update-types:
+          - "minor"
+          - "patch"
+    reviewers:
+      - "sowthri-industrial-ai"
+
+  # ---------- npm dependencies (portfolio site) ----------
+  - package-ecosystem: "npm"
+    directory: "/portfolio-site"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "Asia/Riyadh"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "npm"
+      - "portfolio-site"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      npm-minor:
+        update-types:
+          - "minor"
+          - "patch"
+    reviewers:
+      - "sowthri-industrial-ai"

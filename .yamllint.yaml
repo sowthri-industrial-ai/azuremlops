@@ -1,0 +1,37 @@
+# yamllint configuration
+# Reference: https://yamllint.readthedocs.io/en/stable/configuration.html
+
+extends: default
+
+rules:
+  # Line length — relaxed for GitHub Actions workflows which can have
+  # long step descriptions and inline scripts.
+  line-length:
+    max: 200
+    level: warning
+
+  # Comment indentation — disabled; conflicts with editor auto-indent
+  comments-indentation: disable
+
+  # Truthy values — allow `on:` (used by GitHub Actions) without warning
+  truthy:
+    allowed-values:
+      - "true"
+      - "false"
+      - "on"
+      - "off"
+    check-keys: false
+
+  # Document start marker (`---`) — not required
+  document-start: disable
+
+  # Indentation — 2 spaces, consistent
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+
+ignore: |
+  .github/ISSUE_TEMPLATE/*.md
+  node_modules/
+  .venv/
