@@ -68,6 +68,52 @@ Mandatory tags applied to both: `workload-tier`, `env`, `owner`, `cost-center`, 
 
 > The `#EXT#` marker indicates a personal Microsoft account guest in the tenant — expected for personal-MSA tenants. Some Azure operations require Object ID rather than UPN; both are recorded here for IaC consumption.
 
+### App Registrations (workload-deployment identities)
+
+Per [ADR-0006](./adr/0006-identity-model.md) and [ADR-0008](./adr/0008-github-azure-federation.md), each workload that deploys to Azure has a dedicated App Registration for GitHub Actions OIDC federation. **No client secrets** are issued; authentication is via federated credentials only.
+
+| Display name | App ID (client ID) | Object ID | Service Principal Object ID | Purpose |
+|---|---|---|---|---|
+| `gh-deploy-platform` | `a4e691b3-93a7-4f28-a278-60e5532b3f02` | `97bafaf0-04a5-43e7-a655-50d4597dd23e` | `2382eec9-d17e-41ed-b314-7c499fe7ec5c` | GitHub Actions deployment identity for `platform/` |
+
+#### Federated credentials on `gh-deploy-platform`
+
+| Name | Subject | Issuer | Audience |
+|---|---|---|---|
+| `github-azuremlops-dev` | `repo:sowthri-industrial-ai/azuremlops:environment:dev` | `https://token.actions.githubusercontent.com` | `api://AzureADTokenExchange` |
+| `github-azuremlops-test` | `repo:sowthri-industrial-ai/azuremlops:environment:test` | (same) | (same) |
+| `github-azuremlops-prod` | `repo:sowthri-industrial-ai/azuremlops:environment:prod` | (same) | (same) |
+
+#### RBAC assignments for `gh-deploy-platform` SP
+
+| Role | Scope | Justification |
+|---|---|---|
+| `Reader` | Subscription `d599c6a3-…` | `bicep what-if` evaluation across the subscription |
+| `Contributor` | `rg-platform-prod-uaen` | Deploy and manage platform resources |
+| `User Access Administrator` | `rg-platform-prod-uaen` | Assign managed-identity RBAC during deployment |
+
+`Owner` is **not** granted at any scope. This satisfies the least-privilege requirement in [`NON-NEGOTIABLES.md`](../NON-NEGOTIABLES.md) §1.3.
+
+## GitHub Environments
+
+The repository `sowthri-industrial-ai/azuremlops` defines three GitHub Environments. Each holds the same three variables, pointing GitHub Actions at the same Azure tenant and subscription via OIDC.
+
+| Environment | Branch policy | Required reviewers | Notes |
+|---|---|---|---|
+| `dev` | Any branch may deploy | None | Used for `bicep what-if` and PR-time deployments |
+| `test` | Protected branches only (`main`) | None *(to be added via UI)* | Used for full deployment validation |
+| `prod` | Protected branches only (`main`) | None *(to be added via UI)* | Production target; manual approval gate to be added |
+
+#### Variables (per environment, identical values)
+
+| Variable | Value |
+|---|---|
+| `AZURE_CLIENT_ID` | `a4e691b3-93a7-4f28-a278-60e5532b3f02` |
+| `AZURE_TENANT_ID` | `a5798993-43f3-452a-9e32-5893aff20a36` |
+| `AZURE_SUBSCRIPTION_ID` | `d599c6a3-6859-4aae-8c0e-63674a3b0704` |
+
+These are **variables**, not secrets — client IDs and tenant IDs are public identifiers, useless without OIDC federation.
+
 ## Known unmanaged resources
 
 Resources present in the subscription but **not managed by this portfolio**. Tracked here for FinOps cleanup audits in Phase 1.
@@ -87,7 +133,10 @@ Resources present in the subscription but **not managed by this portfolio**. Tra
 | 2026-05-06 | Subscription moved under `mg-workloads` | |
 | 2026-05-06 | Resource groups `rg-platform-prod-uaen` and `rg-workload-dev-uaen` created in UAE North | All seven mandatory tags applied |
 | 2026-05-06 | Entra security group `sg-azure-platform-admins` created | Sowthri added as the only member |
+| 2026-05-08 | App Registration `gh-deploy-platform` created with three federated credentials | Per ADR-0008 |
+| 2026-05-08 | RBAC assigned to SP for `gh-deploy-platform` | Reader at sub, Contributor + UAA at platform RG |
+| 2026-05-08 | GitHub Environments `dev`, `test`, `prod` created with Azure variables and branch policies | OIDC trust established |
 
 ---
 
-*This inventory is the source of truth for IDs referenced in Bicep parameters, GitHub Actions secrets configuration, and ADRs.*
+*This inventory is the source of truth for IDs referenced in Bicep parameters, GitHub Actions workflows, and ADRs.*
